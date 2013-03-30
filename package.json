@@ -1,0 +1,30 @@
+{
+  "name": "hulk",
+  "version": "0.0.1",
+  "description": "Blog focused static site generator, a la Jekyll.",
+  "bin": "./bin/hulk.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/jpoehls/hulk.git"
+  },
+  "author": "Joshua Poehls <joshua@zduck.com> (http://zduck.com)",
+  "license": "MIT",
+  "dependencies": {
+    "marked": "~0.2.8",
+    "mkdirp": "~0.3.4",
+    "front-matter": "~0.1.1",
+    "iterate-files": "~0.1.1",
+    "minimatch": "~0.2.9",
+    "yaml-js": "0.0.5",
+    "underscore": "~1.4.4",
+    "rimraf": "~2.1.4",
+    "debug": "~0.7.2",
+    "commander": "~1.1.1",
+    "node-static": "~0.6.7",
+    "moment": "~2.0.0",
+    "string": "~1.2.1"
+  }
+}
