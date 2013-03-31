@@ -1,6 +1,6 @@
 {
   "name": "hulk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Blog focused static site generator, a la Jekyll.",
   "main": "index.js",
   "scripts": {
