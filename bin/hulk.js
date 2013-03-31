@@ -7,19 +7,18 @@ var util = require('util');
 var _ = require('underscore');
 var util = require('util');
 
-// todo: fix post pages - HTML is being escaped (e.g. <pre/> tags with code)
-// todo: fix atom.xml template - post.content not available
+// todo: require YAML front-matter in post files, like we do for page files
 // todo: don't use path.combine() for urls, because on Windows the path separator will mess it up
-// todo: support a querystring that will force recompilation when server serves page (in lieu of file watching)
 // todo: support plugins that can provide extra functions to templates (such as as cleanDescription() function) - should be installable via NPM peer dependencies
 // todo: refactor and cleanup code
-// todo: add a README with basic usage and documentation
+// todo: factor out the layout and page template engines so that we can use Jade for layouts/static pages and mustache/ejs? for tokens in posts/pages
 // todo: unit tests?
 
 
 // EVENTUALLY, MAYBE...
-// todo: support --auto flag that will regenerate site when files changes
+// todo: change --server to serve a dynamic version of the site that will reflect changs live without regeneration
 // todo: eventually support pygments for syntax highlighting
+// todo: export a hulk module that can be require()ed by other modules (use cases?)
 
 program
     .version(pjson.version)

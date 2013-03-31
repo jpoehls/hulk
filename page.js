@@ -35,14 +35,22 @@ var Page = function (site, filePath, content) {
     this._originalFrontMatter = parsedContent.attributes;
     this.templateData = _.clone(this._originalFrontMatter);
 
+    // Save the raw content of the page.
+    // This will be the original Markdown or HTML
+    // along with any tokens.
     this.content = parsedContent.body;
 
+    // Mark the page as published unless the front-matter has set it to `false`.
     this.published = true;
     if (typeof this.templateData.published === 'boolean') {
         this.published = this.templateData.published;
     }
 
+    // Get the name of the layout to use.
     this.layout = this.templateData.layout;
+
+    // Use the URL specified in the front-matter or default to a URL
+    // that matches the relative path of the page.
     if (this._originalFrontMatter.url) {
         this.url = this.templateData.url = this._originalFrontMatter.url;
     }
@@ -63,17 +71,27 @@ p.render = function (layouts, siteTemplateData, callback) {
             page: page.templateData
         };
 
-        var pageHtml = page.content;
+        // Render the page's content (no layout), including
+        // replacing any variables and such with their real values.
+        var pageHtml = template.render(page.content, data);
         if (isMarkdownFile(page.filePath)) {
-            pageHtml = marked(template.render(page.content, data));
+            // Convert the Markdown to HTML.
+            pageHtml = marked(pageHtml);
         }
+
+        // Save the page's rendered content (minus layout)
+        // into the page's template data.
+        // This will make it available to index pages and such
+        // which may want to include the content of multiple posts on the page.
+        page.templateData.content = pageHtml;
 
         var layout = layouts[page.layout];
         if (layout) {
+            // Render the page's content into the layout that should be used.
             page.content = layout.render(pageHtml, data);
         }
         else {
-            page.content = template.render(pageHtml, data);
+            page.content = pageHtml;
         }
     }
     catch (err2) {
