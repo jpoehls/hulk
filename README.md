@@ -12,6 +12,8 @@ Hulk only has a CLI interface right now. In the future it should export its inte
 
 ## Site Structure
 
+Hulk reads and writes [all files with UTF-8 encoding](http://www.utf8everywhere.org/). Be sure to save your pages and layouts as UTF-8 to avoid encoding issues.
+
 Your blog has to conform to a specific folder structure.
 
 	/_layouts
