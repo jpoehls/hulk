@@ -17,6 +17,9 @@ Finally, run the `hulk` command inside your project to generate your site.
 
 **Hulk isn't ready for you yet.** I don't recommend using it unless you are hacking on it.
 
+The [hulk-example](http://github.com/jpoehls/hulk-example) is a good place to look if you want to
+get a feel for how a hulk site is structured.
+
 ## Site Structure
 
 Hulk reads and writes [all files with UTF-8 encoding](http://www.utf8everywhere.org/). Be sure to save your pages and layouts as UTF-8 to avoid encoding issues.
