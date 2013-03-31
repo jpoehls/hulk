@@ -7,14 +7,10 @@ var util = require('util');
 var _ = require('underscore');
 var util = require('util');
 
-// todo: don't use path.combine() for urls, because on Windows the path separator will mess it up
+// todo: test on windows and see if URLs use the correct forward-slashes
 // todo: support plugins that can provide extra functions to templates (such as as cleanDescription() function) - should be installable via NPM peer dependencies
-// todo: refactor and cleanup code
 // todo: factor out the layout and page template engines so that we can use Jade for layouts/static pages and mustache/ejs? for tokens in posts/pages
 // todo: unit tests?
-
-
-// EVENTUALLY, MAYBE...
 // todo: change --server to serve a dynamic version of the site that will reflect changs live without regeneration
 // todo: eventually support pygments for syntax highlighting
 // todo: export a hulk module that can be require()ed by other modules (use cases?)

@@ -19,7 +19,7 @@ var defaults = {
     ]
 };
 
-function ignoreSiteFolders(config) {
+function ignoreSpecialFolders(config) {
     var ignores = [
         config.destination
     ];
@@ -40,15 +40,23 @@ function readConfig(callback) {
         }
 
         var config = yaml.load(data);
+
+        // Override the default configuration values with the site's config.
         config = _.defaults(config, defaults);
+
+        // Merge the config file's ignore list with our default ignores.
+        // Unlike other configuration options the user can't override
+        // our defaults, only append to them.
         config.ignore = _.union(config.ignore, defaults.ignore);
 
         // Trim trailing forward-slash from the URL.
+        // This is only applicable to relative URLs of course.
         // All page and post URLs will begin with a forward-slash
         // and this prevents doubling up.
         config.url = config.url.replace(/\/$/, '');
 
-        ignoreSiteFolders(config);
+        // Ignore some special folders set in the configuration.
+        ignoreSpecialFolders(config);
 
         callback(null, config);
     });

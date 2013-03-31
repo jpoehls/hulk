@@ -55,11 +55,11 @@ to your web host.
 
 You can tweak Hulk's behaviors with this configuration file.
 
-- **destination** - the folder that Hulk should generate your site in
-- **layouts** - the folder where your layout files are stored
-- **includes** - the folder where your include files are stored
-- **posts** - the folder where your blog posts are stored
-- **permalink** - default permalink URL format for posts
+- **`destination`** - Changes the directory where Hulk will write files to.
+- **`layouts`** - Changes the directory where layout files are located.
+- **`includes`** - Changes the directory where include files are located.
+- **`posts`** - Changes the directory where posts are located.
+- **`permalink`** - Changes the URLs that posts are generated with.
 
 	This default permalink can be overriden by the post's YAML front-matter.
 	
@@ -70,13 +70,15 @@ You can tweak Hulk's behaviors with this configuration file.
 	- `{{day}}` - the day of the post (no leading zero)
 	- `{{slug}}` - the slugified title of the post
 
-- **ignore** - array of glob paths to ignore, anything you specify here will be appended to the default ignore list
+- **`ignore`** - A glob pattern list of directories and files to ignore. For example, dot files are ignored by default.
 
-You can define arbitrary global variables that will be available anywhere in your site.
+- **`url`** - Sets `{{site.url}}`, useful for environment switching.
 
-	global:
-		name: My Blog
-		slogan: Useless posts with useless boasts
+- **`global`** - Defines arbitrary global variables that will be available anywhere in your site. For example, a `name` variable would be accessible via `{{site.name}}`.
+
+		global:
+			name: My Blog
+			slogan: Useless posts with useless boasts
 
 #### Default Configuration
 
@@ -106,6 +108,22 @@ Typical front-matter for a post might be:
 ## Template Data
 
 You have access to a variety of data and helper functions in your layouts and pages.
+
+### Site Variables
+
+- **`site.time`** - A `Date` object with the current time (when you run the hulk command).
+- **`site.url`** - The URL configuration value with any trailing forward-slashes removed.
+- **`site.posts`** - An array of all the posts.
+- **`site.pages`** - An array of the non-post pages.
+- Any variables defined in the `global` configuration section will also be accessible via `site.VARIABLE_NAME`. 
+
+### Page Variables
+
+- Any variables defined in the page's YAML front-matter will be accessible via `page.VARIABLE_NAME`.
+
+### Includes
+
+Coming soon.
 
 ### Helper Functions
 
