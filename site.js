@@ -10,6 +10,7 @@ var Page = require('./page');
 var StaticFile = require('./staticFile');
 var minimatch = require('minimatch');
 var debug = require('debug')('duckgen:site');
+var exec = require('child_process').exec;
 
 var Site = function (config) {
     this.config = config;
@@ -284,8 +285,62 @@ p.render = function (callback) {
 };
 
 p.cleanup = function (callback) {
+    var queue = 0,
+        site = this,
+        queueLoaded = false;
+
+    function dequeue() {
+        queue--;
+        if (queueLoaded && queue === 0) {
+            callback();
+        }
+    }
+
     // todo: remove orphaned files (files not in pages, posts, or staticFiles) and empty directories in destination
-    callback();
+
+    // Build a list of the file paths we will be creating during the write step.
+    var expectedFiles = _.union(
+        _.pluck(site.posts, 'filePath'),
+        _.pluck(site.pages, 'filePath'),
+        _.pluck(site.staticFiles, 'filePath')
+    );
+
+    // Deletes all empty directories under the given parent.
+    // Including directories that only contain other empty directories.
+    function deleteEmptyDirs(parentDir, callback) {
+        queue++;
+        queueLoaded = true;
+        // todo: do this in a platform independent way!
+        exec('find . -type d -empty -exec rmdir {} \\;', {
+            cwd: parentDir
+        }, function(err) {
+            //if (err) {
+            //    site.emit('error', err);
+            //}
+
+            dequeue();
+        });
+    }
+
+    // Delete all extraneous files in the destination directory.
+    iterateFiles(
+      site.config.destination,
+        function (filePath) {
+            if (_.indexOf(expectedFiles, filePath) === -1) {
+                queue++;
+                fs.unlink(filePath, function(err) {
+                   dequeue();
+                });
+            }
+        },
+        function(err) {
+            if (err) {
+                site.emit('error', err);
+            }
+
+            deleteEmptyDirs(site.config.destination, callback);
+        }
+    );
 };
 
 // Write the posts, pages, and static files to the destination folder.

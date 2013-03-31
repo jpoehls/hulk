@@ -7,7 +7,7 @@ var util = require('util');
 var _ = require('underscore');
 var util = require('util');
 
-// todo: FIX the site generator isn't removing extraneous files from the _site folder. example: generate site with posts, delete one of those posts, regenerate, old post still in _site.
+// todo: FIX the site generator's cleanup method only works on UNIX.
 // todo: add support for includes (load from config.includes folder)
 // todo: add support for plugins. first plugin being a sitemap content plugin.
 // todo: test on windows and see if URLs use the correct forward-slashes
