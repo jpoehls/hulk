@@ -4,9 +4,16 @@ Hulk is a blog focused static site generator, a la [Jekyll](http://jekyllrb.com)
 
 ## Getting Started
 
-Hulk only has a CLI interface right now. In the future it should export its interface so you can `require()` it.
+Hulk should be installed locally in your project.
 
-`npm install -g hulk`
+	npm install hulk
+
+Next you should install the command line interface globally. This is what you
+will use to actually run hulk and generate your site.
+
+	npm install -g hulk-cli
+
+Finally, run the `hulk` command inside your project to generate your site.
 
 **Hulk isn't ready for you yet.** I don't recommend using it unless you are hacking on it.
 

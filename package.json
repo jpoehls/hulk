@@ -2,7 +2,7 @@
   "name": "hulk",
   "version": "0.0.1",
   "description": "Blog focused static site generator, a la Jekyll.",
-  "bin": "./bin/hulk.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
