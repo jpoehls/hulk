@@ -8,7 +8,7 @@ Hulk should be installed locally in your project.
 
 	npm install hulk
 
-Next you should install the command line interface globally. This is what you
+Next you should install [the command line interface](http://github.com/jpoehls/hulk-cli/) globally. This is what you
 will use to actually run hulk and generate your site.
 
 	npm install -g hulk-cli
