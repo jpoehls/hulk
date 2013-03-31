@@ -9,7 +9,7 @@ var Post = require('./post');
 var Page = require('./page');
 var StaticFile = require('./staticFile');
 var minimatch = require('minimatch');
-var debug = require('debug')('duckgen:site');
+var debug = require('debug')('hulk:site');
 var exec = require('child_process').exec;
 
 var Site = function (config) {
