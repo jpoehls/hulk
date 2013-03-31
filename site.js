@@ -19,6 +19,8 @@ var Site = function (config) {
     this.reset();
 };
 
+// Any errors during site processing,
+// along with other status events will be emmitted.
 util.inherits(Site, EventEmitter);
 
 var p = Site.prototype;
@@ -140,9 +142,14 @@ p.read = function (callback) {
                         return;
                     }
 
-                    var post = new Post(site, filePath, data);
-                    if (post.published) {
-                        site.posts.push(post);
+                    // Check for front-matter to determine if
+                    // this post should be included.
+                    // Posts without front-matter are ignored.
+                    if (data.substr(0, 3) === '---') {
+                        var post = new Post(site, filePath, data);
+                        if (post.published) {
+                            site.posts.push(post);
+                        }
                     }
 
                     dequeue();

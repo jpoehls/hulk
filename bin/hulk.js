@@ -7,7 +7,6 @@ var util = require('util');
 var _ = require('underscore');
 var util = require('util');
 
-// todo: require YAML front-matter in post files, like we do for page files
 // todo: don't use path.combine() for urls, because on Windows the path separator will mess it up
 // todo: support plugins that can provide extra functions to templates (such as as cleanDescription() function) - should be installable via NPM peer dependencies
 // todo: refactor and cleanup code
