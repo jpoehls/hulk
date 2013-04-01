@@ -10,7 +10,7 @@ var Page = require('./page');
 var StaticFile = require('./staticFile');
 var minimatch = require('minimatch');
 var debug = require('debug')('hulk:site');
-var exec = require('child_process').exec;
+var rimraf = require('rimraf');
 
 var Site = function (config) {
     this.config = config;
@@ -65,7 +65,7 @@ p.reset = function () {
 
     this.templateData = _.defaults({
         time : new Date(),
-        url: this.config.url,
+        url  : this.config.url,
         posts: [],
         pages: []
     }, this.config.global);
@@ -310,13 +310,11 @@ p.cleanup = function (callback) {
     function deleteEmptyDirs(parentDir, callback) {
         queue++;
         queueLoaded = true;
-        // todo: do this in a platform independent way!
-        exec('find . -type d -empty -exec rmdir {} \\;', {
-            cwd: parentDir
-        }, function(err) {
-            //if (err) {
-            //    site.emit('error', err);
-            //}
+
+        rimraf(site.config.destination, function (err) {
+            if (err) {
+                site.emit('error', err);
+            }
 
             dequeue();
         });
@@ -324,16 +322,16 @@ p.cleanup = function (callback) {
 
     // Delete all extraneous files in the destination directory.
     iterateFiles(
-      site.config.destination,
+        site.config.destination,
         function (filePath) {
             if (_.indexOf(expectedFiles, filePath) === -1) {
                 queue++;
-                fs.unlink(filePath, function(err) {
-                   dequeue();
+                fs.unlink(filePath, function (err) {
+                    dequeue();
                 });
             }
         },
-        function(err) {
+        function (err) {
             if (err) {
                 site.emit('error', err);
             }
