@@ -8,10 +8,10 @@ var defaults = {
     source     : process.cwd(),
     destination: '_site',
     layouts    : '_layouts',
-    includes   : '_includes',
     posts      : '_posts',
     permalink  : '/{{year}}/{{month}}/{{day}}/{{slug}}.html',
     ignore     : [
+        '_config.yml',
         'node_modules/**',
         'package.json',
         '**/.*', // dot files
@@ -21,7 +21,9 @@ var defaults = {
 
 function ignoreSpecialFolders(config) {
     var ignores = [
-        config.destination
+        config.destination,
+        config.layouts,
+        config.posts
     ];
 
     for (var i = 0; i < ignores.length; i++) {

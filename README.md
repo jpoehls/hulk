@@ -67,7 +67,6 @@ You can tweak Hulk's behaviors with this configuration file.
 
 - **`destination`** - Changes the directory where Hulk will write files to.
 - **`layouts`** - Changes the directory where layout files are located.
-- **`includes`** - Changes the directory where include files are located.
 - **`posts`** - Changes the directory where posts are located.
 - **`permalink`** - Changes the URLs that posts are generated with.
 
@@ -94,7 +93,6 @@ You can tweak Hulk's behaviors with this configuration file.
 
 	destination: _site
 	layouts: _layouts
-	includes: _includes
 	posts: _posts
 	permalink: '/{{year}}/{{month}}/{{day}}/{{slug}}.html'
 	ignore:
@@ -130,10 +128,6 @@ You have access to a variety of data and helper functions in your layouts and pa
 ### Page Variables
 
 - Any variables defined in the page's YAML front-matter will be accessible via `page.VARIABLE_NAME`.
-
-### Includes
-
-Coming soon.
 
 ### Helper Functions
 

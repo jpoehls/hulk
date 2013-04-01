@@ -7,6 +7,7 @@ var util = require('util');
 var _ = require('underscore');
 var util = require('util');
 
+// todo: support putting images and other assets in a folder along side the post. /_posts/2013/title-of-post/post.md + /image1.jpg, etc
 // todo: factor out the page markdown support like we did for template engines, so we can support textile, etc in the future
 // todo: support Jade pages (in addition to layouts)
 // todo: replace the cleanup method with a simple dump of the destination folder
