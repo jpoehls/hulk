@@ -7,6 +7,7 @@ var util = require('util');
 var _ = require('underscore');
 var util = require('util');
 
+// todo: investigate merging templateEngines and converters (basically dump templateEngines) they are basically the same thing...
 // todo: support putting images and other assets in a folder along side the post. /_posts/2013/title-of-post/post.md + /image1.jpg, etc
 // todo: add support for plugins. first plugin being a sitemap content plugin.
 // todo: test on windows and see if URLs use the correct forward-slashes
