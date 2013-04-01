@@ -8,14 +8,9 @@ var _ = require('underscore');
 var util = require('util');
 
 // todo: support putting images and other assets in a folder along side the post. /_posts/2013/title-of-post/post.md + /image1.jpg, etc
-// todo: factor out the page markdown support like we did for template engines, so we can support textile, etc in the future
-// todo: support Jade pages (in addition to layouts)
-// todo: replace the cleanup method with a simple dump of the destination folder
-// todo: add support for includes (load from config.includes folder), Jade only
 // todo: add support for plugins. first plugin being a sitemap content plugin.
 // todo: test on windows and see if URLs use the correct forward-slashes
 // todo: support plugins that can provide extra functions to templates (such as as cleanDescription() function) - should be installable via NPM peer dependencies
-// todo: factor out the layout and page template engines so that we can use Jade for layouts/static pages and mustache/ejs? for tokens in posts/pages
 // todo: unit tests?
 // todo: change --server to serve a dynamic version of the site that will reflect changs live without regeneration
 // todo: eventually support pygments for syntax highlighting

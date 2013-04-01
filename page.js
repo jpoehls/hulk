@@ -3,32 +3,7 @@ var fm = require('front-matter');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
 var _ = require('underscore');
-var marked = require('marked');
-
-// All pages get processed as an underscore template
-// for token replacement.
-var underscoreTemplate = require('./templateEngines/underscore');
-
-// Set default markdown conversions options.
-marked.setOptions({
-    gfm       : true,
-    tables    : true,
-    breaks    : false,
-    pedantic  : false,
-    sanitize  : false,
-    smartLists: true,
-    langPrefix: 'language-'/*,
-     highlight: function(code, lang) {
-     if (lang === 'js') {
-     return highlighter.javascript(code);
-     }
-     return code;
-     }*/
-});
-
-function isMarkdownFile(filePath) {
-    return /^\.(md|markdown)$/i.test(path.extname(filePath));
-}
+var converters = require('./converters');
 
 var Page = function (site, filePath, content) {
     this.filePath = filePath;
@@ -74,19 +49,17 @@ p.render = function (layouts, siteTemplateData, callback) {
             page: page.templateData
         };
 
-        // Render the page's content (no layout), including
-        // replacing any variables and such with their real values.
-        var pageHtml = underscoreTemplate.render(page.content, data);
-        if (isMarkdownFile(page.filePath)) {
-            // Convert the Markdown to HTML.
-            pageHtml = marked(pageHtml);
+        var converter = converters.getConverter(page);
+        if (!converter) {
+            // Fallback to using a default basic converter.
+            converter = converters.default;
         }
 
         // Save the page's rendered content (minus layout)
         // into the page's template data.
         // This will make it available to index pages and such
         // which may want to include the content of multiple posts on the page.
-        page.templateData.content = pageHtml;
+        var pageHtml = page.templateData.content = converter.render(page.content, data);
 
         var layout = layouts[page.layout];
         if (layout) {
