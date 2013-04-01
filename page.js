@@ -4,7 +4,10 @@ var mkdirp = require('mkdirp');
 var fs = require('fs');
 var _ = require('underscore');
 var marked = require('marked');
-var template = require('./template');
+
+// All pages get processed as an underscore template
+// for token replacement.
+var underscoreTemplate = require('./templateEngines/underscore');
 
 // Set default markdown conversions options.
 marked.setOptions({
@@ -73,7 +76,7 @@ p.render = function (layouts, siteTemplateData, callback) {
 
         // Render the page's content (no layout), including
         // replacing any variables and such with their real values.
-        var pageHtml = template.render(page.content, data);
+        var pageHtml = underscoreTemplate.render(page.content, data);
         if (isMarkdownFile(page.filePath)) {
             // Convert the Markdown to HTML.
             pageHtml = marked(pageHtml);

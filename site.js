@@ -123,7 +123,7 @@ p.read = function (callback) {
                         return;
                     }
 
-                    site.layouts[layoutName] = new Layout(site, data);
+                    site.layouts[layoutName] = new Layout(site, filePath, data);
 
                     dequeue();
                 });

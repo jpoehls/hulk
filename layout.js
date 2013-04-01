@@ -1,17 +1,18 @@
 var path = require('path');
-var fm = require('front-matter');
 var _ = require('underscore');
 var moment = require('moment');
 var S = require('string');
 var util = require('util');
-var template = require('./template');
+var templateEngines = require('./templateEngines');
 
-var Layout = function (site, content) {
+var Layout = function (site, filePath, content) {
     this.site = site;
+    this.filePath = filePath;
+    this.content = content;
 
-    content = fm(content);
-    this.templateData = content.attributes;
-    this.content = content.body;
+    this.engine = templateEngines.getLayoutEngine(this);
+
+    this.compiled = this.engine.compile(this.content);
 };
 
 var p = Layout.prototype;
@@ -21,7 +22,7 @@ p.render = function (pageContent, data) {
         content: pageContent
     });
 
-    var output = template.render(this.content, data);
+    var output = this.engine.render(this.compiled, data);
     return output;
 };
 
