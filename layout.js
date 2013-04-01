@@ -12,7 +12,7 @@ var Layout = function (site, filePath, content) {
 
     this.engine = templateEngines.getLayoutEngine(this);
 
-    this.compiled = this.engine.compile(this.content);
+    this.compiled = this.engine.compile(this.content, this.filePath);
 };
 
 var p = Layout.prototype;

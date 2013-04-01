@@ -5,12 +5,13 @@ var _ = require('underscore');
 /*
  {
  supports: function(layout) => boolean
- compile: function(templateContent) => compiled template function
+ compile: function(templateContent, layoutFilePath) => compiled template function
  render: function(templateContent|compiledTemplateFunction, templateData) => rendered output
  }
  */
 var engines = [
-    require('./underscore')
+    require('./underscore'),
+    require('./jade')
 ];
 
 // Export a single function that returns the first template engine
